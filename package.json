@@ -21,7 +21,7 @@
   "homepage": "https://github.com/justpeachy8688/fitness-tracker#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.12.4",
+    "mongoose": "^5.3.16",
     "morgan": "^1.10.0"
   }
 }
