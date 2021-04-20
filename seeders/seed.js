@@ -1,10 +1,20 @@
 let mongoose = require("mongoose");
 let db = require("../models");
+require("dotenv").config();
 
-mongoose.connect("mongodb://localhost/workout", {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useUnifiedTopology: true
 });
+
+mongoose.connection.on('connected', () =>
+    console.log('Connected to MongoDB Endpoint')
+);
+
+mongoose.connection.on('error', (err) =>
+    console.log(`Mongoose default connection error: ${err}`)
+);
 
 let workoutSeed = [
     {
@@ -124,13 +134,18 @@ let workoutSeed = [
     }
 ];
 
-db.Workout.deleteMany({})
-    .then(() => db.Workout.collection.insertMany(workoutSeed))
+db.Workout.find({ _id: "607e493d55c00334804679d5" })
     .then(data => {
-        console.log(data.result.n + " records inserted!");
-        process.exit(0);
+        console.log(data)
     })
-    .catch(err => {
-        console.error(err);
-        process.exit(1);
-    });
+
+// db.Workout.deleteMany({})
+//     .then(() => db.Workout.collection.insertMany(workoutSeed))
+//     .then(data => {
+//         console.log(data.result.n + " records inserted!");
+//         process.exit(0);
+//     })
+//     .catch(err => {
+//         console.error(err);
+//         process.exit(1);
+//     });
