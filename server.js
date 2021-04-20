@@ -28,6 +28,9 @@ mongoose.connection.on('error', (err) =>
     console.log(`Mongoose default connection error: ${err}`)
 );
 
+// routes
+app.use(require("./routes/api.js"));
+
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`);
 });
