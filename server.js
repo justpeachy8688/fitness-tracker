@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const logger = require("morgan");
+const morgan = require("morgan");
 require("dotenv").config();
 
 //START A SERVER AND LISTEN ON PORT 3000
@@ -10,7 +10,6 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 app.use(express.static("public"));
 
 // console.log(`Connection: ${process.env.MONGODB_URI}`)
@@ -31,6 +30,7 @@ mongoose.connection.on('error', (err) =>
 
 // routes
 app.use(require("./routes/api.js"));
+app.use(require("./routes/htmlRoutes.js"));
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`);
